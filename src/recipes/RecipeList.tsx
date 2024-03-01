@@ -23,8 +23,9 @@ export default function RecipeList() {
     return (
       <li key={recipe.id}>
         <Link to={`${recipe.id}`}>{recipe.name}</Link>,
+        <Link className="recipe-btn" to="/add" state={recipe}>Edit </Link>
         {/*TODO:Eventually this should only be added for a logged in user*/}
-        {/* <Link className="recipe-btn" to="/add" state={recipe}>Edit </Link> */}
+  
       </li>
     );
   });
