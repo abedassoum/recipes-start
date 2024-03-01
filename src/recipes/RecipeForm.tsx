@@ -1,5 +1,5 @@
 import "./RecipeForm.css";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { getCategories, addRecipe, deleteRecipe, Recipe } from "../services/apiFacade";
 import { useLocation } from "react-router-dom";
 
@@ -21,16 +21,16 @@ export default function RecipeForm() {
   //const [formData, setFormData] = useState<Recipe>(recipeToEdit || EMPTY_RECIPE);
   const [formData, setFormData] = useState<Recipe>(recipeToEdit || EMPTY_RECIPE);
 
-  // useEffect(() => {
-  //   getCategories().then((res) => setCategories(res));
-  // }, []);
+  useEffect(() => {
+    getCategories().then((res) => setCategories(res));
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // const { name, value } = e.target;
-    // setFormData((prevFormData) => ({
-    //   ...prevFormData,
-    //   [name]: value,
-    // }));
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     // e.preventDefault();
@@ -41,10 +41,13 @@ export default function RecipeForm() {
   };
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    // e.preventDefault();
-    // const newRecipe = await addRecipe(formData);
-    // alert("New recipe added")
-    // console.info("New/Edited Recipe", newRecipe);
+    e.preventDefault();
+   const addedOrEdited = formData.id ? "edited" : "added";
+   const newRecipe = await addRecipe(formData);
+   alert(`Recipe ${addedOrEdited} successfully!`);
+   setFormData({ ...EMPTY_RECIPE });
+   console.log("newRecipe", newRecipe);
+    
   };
 
   return (
@@ -134,7 +137,7 @@ export default function RecipeForm() {
           <input type="text" id="source" name="source" required />
         </div>
       </form>
-      <button type="submit" className="recipe-form-btn">
+      <button type="submit" className="recipe-form-btn" onClick={handleSubmit}>
         Submit
       </button>
       <button
