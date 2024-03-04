@@ -39,7 +39,7 @@ async function getRecipes(category: string | null): Promise<Array<Recipe>> {
 }
 async function getRecipe(id: number): Promise<Recipe> {
   //if (recipes.length > 0) return [...recipes];
-  return fetch(RECIPE_URL + "/" + id).then(handleHttpErrors);
+  return fetch(RECIPE_URL + "/" + id).then(handleHttpErrors);  
 }
 async function addRecipe(newRecipe: Recipe): Promise<Recipe> {
   const method = newRecipe.id ? "PUT" : "POST";

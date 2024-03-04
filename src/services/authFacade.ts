@@ -17,9 +17,10 @@ interface LoginRequest {
 
 const authProvider = {
   isAuthenticated: false,
-  signIn(user_: LoginRequest): Promise<LoginResponse> {
+  async signIn(user_: LoginRequest): Promise<LoginResponse> {
     const options = makeOptions("POST", user_);
-    return fetch(LOGIN_URL, options).then(handleHttpErrors);
+    const res = await fetch(LOGIN_URL, options);
+    return handleHttpErrors(res);
   },
 };
 
