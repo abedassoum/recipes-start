@@ -10,6 +10,7 @@ import Home from "./Home";
 import "./App.css";
 import RecipesLayout from "./recipes/RecipesLayout";
 import RequireAuth from "./security/RequireAuth";
+import AddCategory from "./recipes/AddCategory";
 
 export default function App() {
   //const auth = useAuth();
@@ -31,6 +32,7 @@ export default function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/add-category" element={<AddCategory />} />
         <Route path="*" element={<h2>Not Found</h2>} />
       </Routes>
     </Layout>
