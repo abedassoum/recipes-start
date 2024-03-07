@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import { addCategory } from "./categoryService";
+
 
 export default function AddCategory() {
     const category = useRef("");
